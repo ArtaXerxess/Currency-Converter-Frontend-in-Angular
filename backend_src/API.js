@@ -1,15 +1,14 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
-// const dotenv = require("dotenv");
+const dotenv = require("dotenv");
 
-// dotenv.config();
+dotenv.config();
 
-const EXCHANGE_API_KEY='de19a5def1fd93790f93d8ac'
+
 
 const app = express();
 const PORT = 8000;
-// const API_KEY = 'de19a5def1fd93790f93d8ac';
 const API_KEY = EXCHANGE_API_KEY;
 
 const allowedOrigins = ["http://localhost:4200"];
