@@ -1,0 +1,40 @@
+<!-- exchange-rates.component.html -->
+<h3>Amount</h3>
+<p>{{ amount }}</p>
+
+<h3>Currency Chosen</h3>
+<p>{{ baseCurrency }}</p>
+
+<h3>Target Currency</h3>
+<p>{{ targetCurrency }}</p>
+
+<h3>API Response</h3>
+<div *ngIf="loading">Loading exchange rates...</div>
+
+<div *ngIf="!loading && !exchangeRates">
+    <p>No exchange rates available.</p>
+</div>
+
+<div *ngIf="!loading && exchangeRates">
+    <h4>The Conversion</h4>
+    <h5>{{ (exchangeRates['conversion_rates'][targetCurrency] * (amount ? +amount : 0)) || 'Invalid amount' }}</h5>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered border border-primary rounded">
+        <thead>
+            <tr>
+                <th scope="col">Currency Code</th>
+                <th scope="col">Exchange Rate</th>
+                <th scope="col">The Conversion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rate of Rates | keyvalue">
+                <td>{{ rate.key }}</td>
+                <td>{{ rate.value }}</td>
+                <td>{{ (rate.value * (amount ? +amount : 0)) || 'Invalid amount' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

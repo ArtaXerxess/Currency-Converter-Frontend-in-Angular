@@ -1,0 +1,30 @@
+<!-- input-form.component.html -->
+<form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
+    <div class="input-group mb-3 rounded-3 ">
+        <div class="row g-2 ">
+            <div class="col-12 col-md-6">
+                <input type="text" placeholder="Amount" class="form-control border border-primary" formControlName="amount"/>
+            </div>
+            <div class="col-12 col-md-6">
+                <select class="form-select border border-primary" formControlName="baseCurrency">
+                    <option value="" disabled selected>Select Currency</option>
+                    <option *ngFor="let currency of CurrencyNames" [value]="currency.Code">{{ currency.name }} ({{ currency.Code }})</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-6">
+                <select formControlName="targetCurrency" class="form-select border border-primary">
+                    <option value="" disabled selected>Select Target Currency</option>
+                    <option *ngFor="let currency of CurrencyNames" [value]="currency.Code">{{ currency.name }} ({{ currency.Code }})</option>
+                </select> 
+            </div>
+            <div class="col-12 col-md-6">
+                <button class="btn btn-primary form-control border border-primary" type="submit" [disabled]="inputForm.invalid">
+                    Get Rates
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="container" *ngIf="!exchangeRatesHidden">
+    <app-exchange-rates [amount]="amountToSend" [baseCurrency]="baseCurrencyToSend" [targetCurrency]="targetCurrencyToSend"></app-exchange-rates>
+</div>
